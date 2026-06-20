@@ -1,0 +1,332 @@
+/**
+ * AIExplainer Styles
+ * File: client/src/styles/AIExplainer.css
+ */
+
+.explainBtn {
+  padding: 10px 16px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+}
+
+.explainBtn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+}
+
+.explainBtn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.explainBtn .spinner {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Overlay */
+.explainerOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: fadeIn 0.3s ease-out;
+  backdrop-filter: blur(4px);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Panel */
+.explainerPanel {
+  background: linear-gradient(135deg, rgba(20, 20, 30, 0.95) 0%, rgba(30, 30, 50, 0.95) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  max-width: 600px;
+  width: 90%;
+  max-height: 80vh;
+  animation: slideUp 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Header */
+.explainerHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 24px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.explainerHeader h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.closeBtn {
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 24px;
+  cursor: pointer;
+  padding: 0;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  transition: all 0.2s;
+}
+
+.closeBtn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* Content */
+.explainerContent {
+  padding: 20px 24px;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.explainerSection {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.explainerSection:last-child {
+  margin-bottom: 0;
+}
+
+.explainerSection h4 {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.8);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.sectionText {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.75);
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.03);
+  border-left: 3px solid rgba(102, 126, 234, 0.5);
+  border-radius: 6px;
+}
+
+/* Complexity Box */
+.complexityBox {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.complexityItem {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 8px;
+}
+
+.complexityItem .label {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.6);
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.complexityItem .value {
+  font-size: 15px;
+  font-weight: 600;
+  color: #00d4aa;
+  font-family: 'Courier New', monospace;
+}
+
+/* Items List */
+.itemsList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.itemsList li {
+  font-size: 13px;
+  line-height: 1.5;
+  padding: 10px 12px;
+  background: rgba(255, 255, 255, 0.02);
+  border-left: 3px solid;
+  border-radius: 4px;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.issueItem {
+  border-left-color: #ff6b6b;
+}
+
+.issueItem::before {
+  content: '⚠️ ';
+}
+
+.improvementItem {
+  border-left-color: #ffd700;
+}
+
+.improvementItem::before {
+  content: '✨ ';
+}
+
+/* No Content */
+.noContent {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 20px;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.noContent p {
+  margin: 0;
+  font-size: 13px;
+}
+
+.noContent .small {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+/* Footer */
+.explainerFooter {
+  padding: 16px 24px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.closeFooterBtn {
+  padding: 8px 16px;
+  background: rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.closeFooterBtn:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Scrollbar styling */
+.explainerContent::-webkit-scrollbar {
+  width: 6px;
+}
+
+.explainerContent::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 3px;
+}
+
+.explainerContent::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 3px;
+}
+
+.explainerContent::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .explainerPanel {
+    max-width: 95%;
+    max-height: 90vh;
+  }
+
+  .explainerHeader {
+    padding: 16px 20px;
+  }
+
+  .explainerContent {
+    padding: 16px 20px;
+  }
+
+  .explainerFooter {
+    padding: 12px 20px;
+  }
+
+  .explainBtn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .complexityBox {
+    grid-template-columns: 1fr;
+  }
+}
