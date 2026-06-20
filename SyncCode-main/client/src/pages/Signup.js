@@ -3,6 +3,23 @@ import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 
+const EyeIcon = ({ open }) => (
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    {open ? (
+      <>
+        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+        <circle cx="12" cy="12" r="3"/>
+      </>
+    ) : (
+      <>
+        <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/>
+        <path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/>
+        <line x1="1" y1="1" x2="23" y2="23"/>
+      </>
+    )}
+  </svg>
+);
+
 const strengthRules = [
   { label: 'At least 8 characters', test: p => p.length >= 8 },
   { label: 'One uppercase letter', test: p => /[A-Z]/.test(p) },
@@ -95,21 +112,19 @@ const Signup = () => {
           {errors.email && <p style={{ color: '#ef4444', fontSize: '0.78rem', marginTop: 4 }}>{errors.email}</p>}
         </div>
 
-        {/* Password */}
-        <div style={{ marginBottom: '0.5rem', position: 'relative' }}>
-          <input type={showPassword ? 'text' : 'password'} placeholder="Create a password"
-            value={form.password} onChange={e => set('password', e.target.value)}
-            onKeyDown={e => e.key === 'Enter' && handleSignup()}
-            disabled={isLoading}
-            style={{ width: '100%', paddingRight: 40, borderColor: errors.password ? '#ef4444' : undefined }} />
-          <button type="button"
-            onMouseDown={() => setShowPassword(true)} onMouseUp={() => setShowPassword(false)}
-            onMouseLeave={() => setShowPassword(false)}
-            style={{ position: 'absolute', right: 12, top: '50%', transform: 'translateY(-50%)', background: 'none', border: 'none', cursor: 'pointer', color: 'rgba(255,255,255,0.5)', fontSize: 16, padding: 0 }}>
-            {showPassword ? '🙈' : '👁'}
-          </button>
-        </div>
 
+        {/* Password */}
+<div style={{ marginBottom: '0.5rem', position: 'relative' }}>
+  <input type={showPassword ? 'text' : 'password'} placeholder="Create a password"
+    value={form.password} onChange={e => set('password', e.target.value)}
+    onKeyDown={e => e.key === 'Enter' && handleSignup()}
+    disabled={isLoading}
+    style={{ width: '100%', paddingRight: 40, borderColor: errors.password ? '#ef4444' : undefined }} />
+  <button type="button" className="eye-btn"
+    onClick={() => setShowPassword(v => !v)} tabIndex={-1}>
+    <EyeIcon open={showPassword} />
+  </button>
+</div>
         {/* Strength bar */}
         {form.password.length > 0 && (
           <div style={{ marginBottom: '0.5rem' }}>
@@ -132,21 +147,19 @@ const Signup = () => {
         )}
         {errors.password && <p style={{ color: '#ef4444', fontSize: '0.78rem', marginBottom: '0.5rem' }}>{errors.password}</p>}
 
-        {/* Confirm password */}
-        <div style={{ marginBottom: '1rem', position: 'relative' }}>
-          <input type={showConfirm ? 'text' : 'password'} placeholder="Confirm your password"
-            value={form.confirmPassword} onChange={e => set('confirmPassword', e.target.value)}
-            onKeyDown={e => e.key === 'Enter' && handleSignup()}
-            disabled={isLoading}
-            style={{ width: '100%', paddingRight: 40, borderColor: errors.confirmPassword ? '#ef4444' : undefined }} />
-          <button type="button"
-            onMouseDown={() => setShowConfirm(true)} onMouseUp={() => setShowConfirm(false)}
-            onMouseLeave={() => setShowConfirm(false)}
-            style={{ position: 'absolute', right: 12, top: '50%', transform: 'translateY(-50%)', background: 'none', border: 'none', cursor: 'pointer', color: 'rgba(255,255,255,0.5)', fontSize: 16, padding: 0 }}>
-            {showConfirm ? '🙈' : '👁'}
-          </button>
-          {errors.confirmPassword && <p style={{ color: '#ef4444', fontSize: '0.78rem', marginTop: 4 }}>{errors.confirmPassword}</p>}
-        </div>
+       {/* Confirm password */}
+<div style={{ marginBottom: '1rem', position: 'relative' }}>
+  <input type={showConfirm ? 'text' : 'password'} placeholder="Confirm your password"
+    value={form.confirmPassword} onChange={e => set('confirmPassword', e.target.value)}
+    onKeyDown={e => e.key === 'Enter' && handleSignup()}
+    disabled={isLoading}
+    style={{ width: '100%', paddingRight: 40, borderColor: errors.confirmPassword ? '#ef4444' : undefined }} />
+  <button type="button" className="eye-btn"
+    onClick={() => setShowConfirm(v => !v)} tabIndex={-1}>
+    <EyeIcon open={showConfirm} />
+  </button>
+  {errors.confirmPassword && <p style={{ color: '#ef4444', fontSize: '0.78rem', marginTop: 4 }}>{errors.confirmPassword}</p>}
+</div>
 
         <button onClick={handleSignup} disabled={isLoading} style={{ width: '100%' }}>
           {isLoading ? 'Creating account...' : 'Sign Up'}
